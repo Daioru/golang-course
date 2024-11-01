@@ -11,15 +11,12 @@ type Membership struct {
 }
 
 func newUser(name string, membershipType string) User {
-	messageLimit := 100
-	if membershipType == "Premium" {
-		messageLimit = 1000
+	membership := Membership{Type: membershipType}
+	if membershipType == "premium" {
+		membership.MessageCharLimit = 1000
+	} else {
+		membership.Type = "standard"
+		membership.MessageCharLimit = 100
 	}
-	return User{
-		Name: name,
-		Membership: Membership{
-			Type:             membershipType,
-			MessageCharLimit: messageLimit,
-		},
-	}
+	return User{Name: name, Membership: membership}
 }
